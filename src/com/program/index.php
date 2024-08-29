@@ -56,7 +56,7 @@
               <tr>
                 <th scope="row" class="text-body-secondary fs-6"><?= ++$no; ?></th>
                 <td class="text-body-secondary">
-                  <img src="img/3/<?= $data['foto']; ?>" width="40" alt="Foto Profil">
+                  <img src="img/<?= $data['foto']; ?>" width="40" alt="Foto Profil">
                 </td>
                 <td class="text-body-secondary fs-6"><?= $data['nama_lengkap']; ?></td>
                 <td class="text-body-secondary fs-6"><?= $data['jenis_kelamin']; ?></td>

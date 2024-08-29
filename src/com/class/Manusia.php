@@ -42,8 +42,13 @@
     }
 
     // Method Create
-    public function create($foto, $namaLengkap, $jenisKelamin)
+    public function create($foto, $namaLengkap, $jenisKelamin) : void
     {
+      // Mengelola Foto
+      $dir = '../program/img/foto-baru/';
+      $tmpFile = $_FILES['foto']['tmp_name'];
+      move_uploaded_file($tmpFile, $dir . $foto);
+
       $query = "INSERT INTO tb_profil
                 VALUES ('', '$foto', '$namaLengkap', '$jenisKelamin')";
 
@@ -51,8 +56,15 @@
     }
 
     // Method Delete
-    public function delete($id)
+    public function delete($id) : void
     {
+      // Agar Data Foto Ikut Terhapus
+      $queryShow = "SELECT * FROM tb_profil
+                    WHERE id = '$id'";
+      $sqlShow = mysqli_query($this->connect, $queryShow);
+      $result = mysqli_fetch_assoc($sqlShow);
+      unlink('../program/img/foto-baru/' . $result['foto']);
+
       $query = "DELETE FROM tb_profil
                 WHERE id = '$id'";
 
@@ -60,5 +72,5 @@
     }
 
 
-    
+
   }

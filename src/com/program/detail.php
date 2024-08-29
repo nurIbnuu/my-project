@@ -61,7 +61,7 @@
             <=>
           </div>
           <div class="col-sm-4">
-          <img src="img/3/<?= $data['foto']; ?>" width="70" class="img-thumbnail" alt="Foto Profil">
+          <img src="img/<?= $data['foto']; ?>" width="70" class="img-thumbnail" alt="Foto Profil">
           </div>
         </div>
         <!-- Nama Lengkap -->

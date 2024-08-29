@@ -49,7 +49,7 @@
             <label for="foto">Foto</label>
           </div>
           <div class="col-sm-10">
-            <input type="file" class="form-control" id="foto" name="foto">
+            <input required type="file" class="form-control" id="foto" name="foto" accept="image/*">
           </div>
         </div>
         <!-- Nama Lengkap -->
@@ -58,7 +58,7 @@
             <label for="nama_lengkap">Nama Lengkap</label>
           </div>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap">
+            <input required type="text" class="form-control" id="nama_lengkap" name="nama_lengkap">
           </div>
         </div>
         <!-- Jenis Kelamin -->
@@ -67,7 +67,7 @@
             <label for="jenis_kelamin">Jenis Kelamin</label>
           </div>
           <div class="col-sm-10">
-            <select class="form-select" id="jenis_kelamin" name="jenis_kelamin">
+            <select required class="form-select" id="jenis_kelamin" name="jenis_kelamin">
               <option value="Laki-laki">Laki-laki</option>
               <option value="Perempuan">Perempuan</option>
             </select>
