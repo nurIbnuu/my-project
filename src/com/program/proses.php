@@ -15,6 +15,35 @@
     }
     elseif($_POST['aksi'] == 'ubah')
     {
+      $id = $_POST['id'];
+      $namaLengkap = $_POST['nama_lengkap'];
+      $jenisKelamin = $_POST['jenis_kelamin'];
+
+
+
+      $queryShow = "SELECT * FROM tb_profil
+      WHERE id = '$id'";
+      $sqlShow = mysqli_query($database->connect, $queryShow);
+      $result = mysqli_fetch_assoc($sqlShow);
+      if($_FILES['foto']['name'] == '')
+      {
+        $foto = $result['foto'];
+      }
+      else
+      {
+        $foto = $_FILES['foto']['name'];
+        unlink('img/foto-baru/' . $result['foto']);
+        move_uploaded_file($_FILES['foto']['tmp_name'], 'img/foto-ubah/' . $_FILES['foto']['name']);
+      }
+
+      
+      $query = "UPDATE tb_profil SET nama_lengkap = '$namaLengkap', jenis_kelamin = '$jenisKelamin', foto = '$foto' WHERE id = '$id'";
+      
+      $sql = mysqli_query($database->connect, $query);
+
+
+
+
       echo "<script>
               alert('Data Diubah');
               document.location.href = 'index.php';
@@ -30,7 +59,7 @@
 
     echo "<script>
             alert('Data Dihapus');
-            document.location.href = 'index.php';
+            // document.location.href = 'index.php';
           </script>";
   }
 ?>

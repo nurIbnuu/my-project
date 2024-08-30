@@ -1,3 +1,24 @@
+<?php
+  include 'koneksi.php';
+
+  $id = '';
+  $namaLengkap = '';
+  $jenisKelamin = '';
+
+  if(isset($_GET['ubah']))
+  {
+    $id = $_GET['ubah'];
+    
+    $query = "SELECT * FROM tb_profil WHERE id = '$id'";
+    $sql = mysqli_query($database->connect, $query);
+    $result = mysqli_fetch_assoc($sql);
+
+    $namaLengkap = $result['nama_lengkap'];
+    $jenisKelamin = $result['jenis_kelamin'];
+
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,37 +63,40 @@
     <form action="proses.php" method="post" enctype="multipart/form-data">
 
       <div class="p-3 mb-2 bg-body-secondary text-dark-emphasis rounded border border-4">
+          <!-- ID -->
+          <input type="hidden" name="id" value="<?= $id; ?>">
 
-        <!-- Foto -->
-        <div class="mb-3 row">
-          <div class="col-sm-2">
-            <label for="foto">Foto</label>
+          <!-- Foto -->
+          <div class="mb-3 row">
+              <div class="col-sm-2">
+                <label for="foto">Foto</label>
+              </div>
+              <div class="col-sm-10">
+                <input <?php if(!isset($_GET['ubah'])) { echo 'required'; } ?> type="file" class="form-control" id="foto" name="foto" accept="image/*">
+              </div>
           </div>
-          <div class="col-sm-10">
-            <input required type="file" class="form-control" id="foto" name="foto" accept="image/*">
+          <!-- Nama Lengkap -->
+          <div class="mb-3 row">
+              <div class="col-sm-2">
+                <label for="nama_lengkap">Nama Lengkap</label>
+              </div>
+              <div class="col-sm-10">
+                <input required type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="<?= $namaLengkap; ?>">
+              </div>
           </div>
-        </div>
-        <!-- Nama Lengkap -->
-        <div class="mb-3 row">
-          <div class="col-sm-2">
-            <label for="nama_lengkap">Nama Lengkap</label>
+          <!-- Jenis Kelamin -->
+          <div class="mb-3 row">
+              <div class="col-sm-2">
+                <label for="jenis_kelamin">Jenis Kelamin</label>
+              </div>
+              <div class="col-sm-10">
+                <select required class="form-select" id="jenis_kelamin" name="jenis_kelamin">
+                  <option value="Laki-laki"  <?php if($jenisKelamin == 'Laki-laki') {echo 'selected';} ?>>Laki-laki</option>
+                  <option value="Perempuan"  <?php if($jenisKelamin == 'Perempuan') {echo 'selected';} ?>>Perempuan</option>
+                </select>
+              </div>
           </div>
-          <div class="col-sm-10">
-            <input required type="text" class="form-control" id="nama_lengkap" name="nama_lengkap">
-          </div>
-        </div>
-        <!-- Jenis Kelamin -->
-        <div class="mb-3 row">
-          <div class="col-sm-2">
-            <label for="jenis_kelamin">Jenis Kelamin</label>
-          </div>
-          <div class="col-sm-10">
-            <select required class="form-select" id="jenis_kelamin" name="jenis_kelamin">
-              <option value="Laki-laki">Laki-laki</option>
-              <option value="Perempuan">Perempuan</option>
-            </select>
-          </div>
-        </div>
+          
         <!-- Tombol Submit -->
         <div class="row">
           <div class="col text-end">
